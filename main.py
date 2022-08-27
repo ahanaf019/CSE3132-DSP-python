@@ -1,4 +1,4 @@
-from dft import dft
+from dft import *
 import math
 from math import pi
 import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ a1 = 1
 a2 = 0.5
 
 # Sampling frequency
-fs = 4000
+fs = 8000
 
 # Signal generation
 i = 0
@@ -26,7 +26,7 @@ while i <= 1:
     x.append(sig)    
     i += .00001
 
-plt.subplot(2,1,1)
+plt.subplot(3,1,1)
 plt.plot(t, x)
 
 
@@ -45,8 +45,20 @@ for i in range(nmin, nmax + 1):
 plt.plot(n, xs, '.r')
 
 
-c, X = dft(n, xs, fs, point=16)
+c, X, N = dft(n, xs, fs, point=16, norm=True)
+# print(N)
+plt.subplot(3,1,2)
+plt.stem(c, N)
 
-plt.subplot(2,1,2)
-plt.stem(c, X)
+
+n, x = inv_dft(c, X, point=16)
+
+
+plt.subplot(3,1,3)
+plt.plot(n, x, '.')
+print(x)
+
+
+
+
 plt.show()
