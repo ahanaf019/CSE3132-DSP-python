@@ -115,3 +115,14 @@ def GetValueAtPoint(n, x, point):
         if n[i] == point:
             return x[i]
     return -99999999
+
+def SliceSignal(n1, x1, start, end):
+    n = []
+    x = []
+
+    for i in range (0, len(n1)):
+        if i >= start and i <= end:
+            n.append(i)
+            x.append(x1[i])
+    
+    return n, x

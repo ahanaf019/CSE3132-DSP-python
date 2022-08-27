@@ -4,34 +4,22 @@ import math
 import matplotlib.pyplot as plt
 from analog_signal import SinSignal
 
-x = []
-t = []
-i = 0
-while i <= 1:
-    t.append(i)
-    sig = math.sin(2 * pi * 1 * i) + 0.5 * math.sin(2 * pi * 2 * i + 3*pi/4)
-    x.append(sig)    
-    i += .00001
 
 
-plt.plot(t, x)
-# plt.show()
+def dft(n1, x1, fs, point):
+    X = []
+    c = []
+    res = fs/point
+    x1 = x1[0:point]
 
+    for i in range(0, point):
+        X.append(0)
+        c.append(i*res)
 
-fs = 8
-T = 1/fs
+        for j in range(0, point):
+            tmp = x1[j] * math.e**(-1j * 2 * math.pi * i * j/point)
+            X[i] += tmp
+            # print(i, tmp)
 
-nmin = math.ceil(min(t)/T)
-nmax = math.floor(max(t)/T)
-print(nmin, nmax)
-n = []
-xs = []
-for i in range(nmin, nmax + 1):
-    n.append(i*T)
-    sig = math.sin(2 * pi * 1 * i*T) + 0.5 * math.sin(2 * pi * 2 * i*T + 3*pi/4)
-    xs.append(sig)
-
-
-plt.plot(n, xs, '.r')
-plt.show()
-
+        X[i] = abs(X[i])
+    return c, X
