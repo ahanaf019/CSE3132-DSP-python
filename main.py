@@ -7,26 +7,29 @@ import matplotlib.pyplot as plt
 x = []
 t = []
 
+# Point dft
+point = 64
+
 # Signal frequencies
-f1 = 1000
-f2 = 2000
+f1 = 10
+f2 = 20
 
 # Signal amplitudes
 a1 = 1
 a2 = 0.5
 
 # Sampling frequency
-fs = 8000
+fs = 80
 
 # Signal generation
 i = 0
-while i <= 1:
+while i <= 2:
     t.append(i)
     sig = a1 * math.sin(2 * pi * f1 * i) + a2 * math.sin(2 * pi * f2 * i + 3*pi/4)
     x.append(sig)    
     i += .00001
 
-plt.subplot(3,1,1)
+plt.subplot(2,1,1)
 plt.plot(t, x)
 
 
@@ -45,17 +48,22 @@ for i in range(nmin, nmax + 1):
 plt.plot(n, xs, '.r')
 
 
-c, X, N = dft(n, xs, fs, point=16, norm=True)
+c, X, N = dft(n, xs, fs, point=point, norm=True)
 # print(N)
-plt.subplot(3,1,2)
+plt.subplot(2,1,2)
 plt.stem(c, N)
 
+print(len(c))
 
-n, x = inv_dft(c, X, point=16)
+
+n, x = inv_dft(c, X, point=point)
+
+for i in range(0, len(n)):
+    n[i] = n[i]*T
 
 
-plt.subplot(3,1,3)
-plt.plot(n, x, '.')
+plt.subplot(2,1,1)
+plt.plot(n, x, '.y')
 print(x)
 
 

@@ -126,3 +126,29 @@ def SliceSignal(n1, x1, start, end):
             x.append(x1[i])
     
     return n, x
+
+
+def RemovePadding(n1, x1):
+    n = []
+    x = []
+
+    st = False
+    ed = False
+    ln = len(n1) - 1
+
+    for i in range(0, ln):
+        if st and ed:
+            break
+        if x1[i] != 0 and not st:
+            start = i
+            st = True
+        
+        if x1[ln - i] != 0 and not ed:
+            end = ln - i
+            ed = True
+
+    for i in range(start, end+1):
+        x.append(x1[i])
+        n.append(n1[i])
+
+    return n, x

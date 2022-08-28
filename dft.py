@@ -38,5 +38,8 @@ def inv_dft(n1, x1, point):
             x[i] += x1[j] * math.e**(1j * 2 * math.pi * i * j/point)
   
         x[i] /= point
-        x[i] = abs(x[i])
+        # x[i] = abs(x[i])
     return n, x
+
+
+# def

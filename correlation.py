@@ -11,8 +11,8 @@ def CrossCorrelation(n1, n2, x, y):
     n = []
     res = []
 
-    nmin = min(n2) - max(n1)
-    nmax = max(n2) + len(n1)
+    nmin = min(min(n2), min(n1)) - max(max(n1),max(n2))
+    nmax = max(n2) + max(len(n1), len(n2))
 
     i = nmin
     while i != nmax + 1:
@@ -23,7 +23,7 @@ def CrossCorrelation(n1, n2, x, y):
         res.append(sum(xr))
         n.append(i)
         i += 1
-    return n, res
+    return RemovePadding(n, res)
 
 
 
@@ -43,10 +43,10 @@ def AutoCorrelation(n1, x):
         res.append(sum(xr))
         n.append(i)
         i += 1
-    return n, res
+    return RemovePadding(n, res)
 
 
 
-n, x = CrossCorrelation(n1, n2, x, y)
-plt.stem(n, x)
-plt.show()
+# n, x = CrossCorrelation(n1, n2, x, y)
+# plt.stem(n, x)
+# plt.show()

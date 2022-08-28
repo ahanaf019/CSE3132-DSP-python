@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 def convolution_sum(n1, n2, h, x):
 
     n1, h = FoldSignal(n1, h)
-    nmin = min(n2) - max(n1)
+    nmin = min(min(n2),min(n1)) - max(max(n1),max(n2))
     nmax = max(n2) + len(n1)
 
     n = []
@@ -22,7 +22,8 @@ def convolution_sum(n1, n2, h, x):
         res.append(sum(xm))
         n.append(i)
         i+=1
-    return n, res
+    
+    return RemovePadding(n, res)
 
 
 
